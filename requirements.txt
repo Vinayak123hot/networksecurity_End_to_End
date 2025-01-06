@@ -1,0 +1,25 @@
+python-dotenv
+pandas
+numpy
+pymongo
+certifi
+scikit-learn
+mlflow
+notebook
+matplotlib
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+Flask
+Flask-Cors
+ipykernel
+scipy
+dill
+seaborn
+dagshub
+fastapi
+uvicorn
+##-e .
