@@ -5,6 +5,11 @@ import os,sys
 import numpy as np
 # import dill
 import pickle
+from networksecurity.entity.artifact_entity import ClassificationMetricArtifact
+from networksecurity.exception.exception import NetworkSecurityException
+from sklearn.metrics import f1_score,precision_score,recall_score
+from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
 
 
 def read_yaml(file_path: str) -> dict:
@@ -51,72 +56,72 @@ def save_object(file_path: str, obj: object) -> None:
     except Exception as e:
         raise NetworkSecurityException(e, sys) from e
     
-# def load_object(file_path: str, ) -> object:
-#     try:
-#         if not os.path.exists(file_path):
-#             raise Exception(f"The file: {file_path} is not exists")
-#         with open(file_path, "rb") as file_obj:
-#             print(file_obj)
-#             return pickle.load(file_obj)
-#     except Exception as e:
-#         raise NetworkSecurityException(e, sys) from e
+def load_object(file_path: str, ) -> object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"The file: {file_path} is not exists")
+        with open(file_path, "rb") as file_obj:
+            print(file_obj)
+            return pickle.load(file_obj)
+    except Exception as e:
+        raise NetworkSecurityException(e, sys) from e
     
-# def load_numpy_array_data(file_path: str) -> np.array:
-#     """
-#     load numpy array data from file
-#     file_path: str location of file to load
-#     return: np.array data loaded
-#     """
-#     try:
-#         with open(file_path, "rb") as file_obj:
-#             return np.load(file_obj)
-#     except Exception as e:
-#         raise NetworkSecurityException(e, sys) from e
+def load_numpy_array_data(file_path: str) -> np.array:
+    """
+    load numpy array data from file
+    file_path: str location of file to load
+    return: np.array data loaded
+    """
+    try:
+        with open(file_path, "rb") as file_obj:
+            return np.load(file_obj)
+    except Exception as e:
+        raise NetworkSecurityException(e, sys) from e
     
 
 
-# def evaluate_models(X_train, y_train,X_test,y_test,models,param):
-#     try:
-#         report = {}
+def evaluate_models(X_train, y_train,X_test,y_test,models,param):
+    try:
+        report = {}
 
-#         for i in range(len(list(models))):
-#             model = list(models.values())[i]
-#             para=param[list(models.keys())[i]]
+        for i in range(len(list(models))):
+            model = list(models.values())[i]
+            para=param[list(models.keys())[i]]
 
-#             gs = GridSearchCV(model,para,cv=3)
-#             gs.fit(X_train,y_train)
+            gs = GridSearchCV(model,para,cv=3)
+            gs.fit(X_train,y_train)
 
-#             model.set_params(**gs.best_params_)
-#             model.fit(X_train,y_train)
+            model.set_params(**gs.best_params_)
+            model.fit(X_train,y_train)
 
-#             #model.fit(X_train, y_train)  # Train model
+            #model.fit(X_train, y_train)  # Train model
 
-#             y_train_pred = model.predict(X_train)
+            y_train_pred = model.predict(X_train)
 
-#             y_test_pred = model.predict(X_test)
+            y_test_pred = model.predict(X_test)
 
-#             train_model_score = r2_score(y_train, y_train_pred)
+            train_model_score = r2_score(y_train, y_train_pred)
 
-#             test_model_score = r2_score(y_test, y_test_pred)
+            test_model_score = r2_score(y_test, y_test_pred)
 
-#             report[list(models.keys())[i]] = test_model_score
+            report[list(models.keys())[i]] = test_model_score
 
-#         return report
+        return report
 
-#     except Exception as e:
-#         raise NetworkSecurityException(e, sys)
+    except Exception as e:
+        raise NetworkSecurityException(e, sys)
 
 
-# def get_classification_score(y_true,y_pred)->ClassificationMetricArtifact:
-#     try:
+def get_classification_score(y_true,y_pred)->ClassificationMetricArtifact:
+    try:
             
-#         model_f1_score = f1_score(y_true, y_pred)
-#         model_recall_score = recall_score(y_true, y_pred)
-#         model_precision_score=precision_score(y_true,y_pred)
+        model_f1_score = f1_score(y_true, y_pred)
+        model_recall_score = recall_score(y_true, y_pred)
+        model_precision_score=precision_score(y_true,y_pred)
 
-#         classification_metric =  ClassificationMetricArtifact(f1_score=model_f1_score,
-#                     precision_score=model_precision_score, 
-#                     recall_score=model_recall_score)
-#         return classification_metric
-#     except Exception as e:
-#         raise NetworkSecurityException(e,sys)
+        classification_metric =  ClassificationMetricArtifact(f1_score=model_f1_score,
+                    precision_score=model_precision_score, 
+                    recall_score=model_recall_score)
+        return classification_metric
+    except Exception as e:
+        raise NetworkSecurityException(e,sys)
