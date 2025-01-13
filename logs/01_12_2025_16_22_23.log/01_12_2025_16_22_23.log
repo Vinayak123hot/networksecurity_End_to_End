@@ -1,0 +1,6 @@
+[ 2025-01-12 16:22:29,315 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2025-01-12 16:22:29,331 ] 107 dagshub - INFO - Accessing as bvssvinu
+[ 2025-01-12 16:22:29,855 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/bvssvinu/networksecurity_End_to_End "HTTP/1.1 200 OK"
+[ 2025-01-12 16:22:30,372 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2025-01-12 16:22:30,372 ] 107 dagshub - INFO - Initialized MLflow to track repo "bvssvinu/networksecurity_End_to_End"
+[ 2025-01-12 16:22:30,388 ] 107 dagshub - INFO - Repository bvssvinu/networksecurity_End_to_End initialized!
